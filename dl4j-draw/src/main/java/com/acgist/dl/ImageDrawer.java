@@ -42,7 +42,7 @@ public class ImageDrawer extends Application {
 
 	@Override
 	public void init() {
-		originalImage = new Image("file:\\E:\\心有猛虎.jpg");
+		originalImage = new Image("心有猛虎.jpg");
 		final int w = (int) originalImage.getWidth();
 		final int h = (int) originalImage.getHeight();
 		composition = new WritableImage(w, h);
@@ -134,7 +134,6 @@ public class ImageDrawer extends Application {
 		int h = (int) composition.getHeight();
 		INDArray out = nn.output(xyOut);
 		PixelWriter writer = composition.getPixelWriter();
-
 		for (int i = 0; i < w; i++) {
 			for (int j = 0; j < h; j++) {
 				int index = i + w * j;
