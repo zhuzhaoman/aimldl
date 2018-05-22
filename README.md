@@ -5,6 +5,7 @@
 数据源：[https://gitee.com/acgist/acgist-guoxue-data](https://gitee.com/acgist/acgist-guoxue-data)
 
 #### 其他项目参考
+[https://deeplearning4j.org/cn/](https://deeplearning4j.org/cn/)<br />
 [https://github.com/hankcs/HanLP](https://github.com/hankcs/HanLP)<br />
 [https://github.com/FudanNLP/fnlp](https://github.com/FudanNLP/fnlp)<br />
 [https://github.com/hxgdzyuyi/tang_poetry](https://github.com/hxgdzyuyi/tang_poetry)<br />
