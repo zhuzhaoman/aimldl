@@ -34,8 +34,8 @@ public class Face {
 	public static void main(String[] args) throws URISyntaxException, IOException {
 //		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 		System.load(localPath(DDL_PATH));
-		Mat image = openImage("/face/csol01.jpg");
-//		Mat image = openImage("/face/崔智云.jpg");
+		Mat image = openImage("/image/csol01.jpg");
+//		Mat image = openImage("/image/崔智云.jpg");
 		CascadeClassifier faceDetector = new CascadeClassifier(localPath(XML_PATH));
 		MatOfRect faceDetections = new MatOfRect();
 		faceDetector.detectMultiScale(image, faceDetections);
