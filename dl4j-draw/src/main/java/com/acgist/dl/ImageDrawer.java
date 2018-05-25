@@ -42,7 +42,7 @@ public class ImageDrawer extends Application {
 
 	@Override
 	public void init() {
-		originalImage = new Image("心有猛虎.jpg");
+		originalImage = new Image("csol.jpg");
 		final int w = (int) originalImage.getWidth();
 		final int h = (int) originalImage.getHeight();
 		composition = new WritableImage(w, h);
