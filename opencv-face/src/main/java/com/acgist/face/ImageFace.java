@@ -24,12 +24,10 @@ import org.opencv.objdetect.CascadeClassifier;
 /**
  * 人脸识别
  */
-public class Face {
+public class ImageFace {
 
-	private static final String DDL_PATH = "/opencv/opencv_java341.dll";
-	private static final String XML_PATH = "/opencv/haarcascade_frontalface_alt.xml";
-//	private static final String DDL_PATH = "D:\\opencv\\build\\java\\x64\\opencv_java341.dll";
-//	private static final String XML_PATH = "D:\\opencv\\build\\etc\\haarcascades\\haarcascade_frontalface_alt.xml";
+	private static final String DDL_PATH = "/opencv/ddl/opencv_java341.dll";
+	private static final String XML_PATH = "/opencv/xml/haarcascade_frontalface_alt.xml";
 	
 	public static void main(String[] args) throws URISyntaxException, IOException {
 //		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
@@ -52,7 +50,7 @@ public class Face {
 //		String path = Face.class.getResource(name).getPath().substring(1);
 //		Mat image = Imgcodecs.imread(path);
 //		解决中文问题
-		InputStream input = Face.class.getResourceAsStream(name);
+		InputStream input = ImageFace.class.getResourceAsStream(name);
 		BufferedImage src = ImageIO.read(input);
 		Mat image = new Mat(src.getHeight(), src.getWidth(), CvType.CV_8UC3);
 		image.put(0, 0, ((DataBufferByte) src.getRaster().getDataBuffer()).getData());
@@ -60,7 +58,7 @@ public class Face {
 	}
 	
 	public static final String localPath(String name) {
-		return Face.class.getResource(name).getPath().substring(1);
+		return ImageFace.class.getResource(name).getPath().substring(1);
 	}
 	
 	public static final void mat2image(Mat mat) throws IOException {
