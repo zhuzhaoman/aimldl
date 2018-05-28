@@ -32,7 +32,7 @@ public class AudioPlayer {
 		Frame frame;
 		grabber.start();
 //		int sec = 60;
-//		fg.setTimestamp(sec*1000000);//纯音频文件设置了时间戳有问题，视频没问题。
+//		fg.setTimestamp(sec * 1000000); // 纯音频文件设置了时间戳有问题，视频没问题。
 		sampleFormat = grabber.getSampleFormat();
 		printMusicInfo(grabber);
 		initSourceDataLine(grabber);
