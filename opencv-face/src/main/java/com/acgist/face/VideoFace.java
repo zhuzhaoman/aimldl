@@ -21,24 +21,26 @@ import org.opencv.objdetect.HOGDescriptor;
 import org.opencv.videoio.VideoCapture;
 import org.opencv.videoio.Videoio;
 
+import com.acgist.utils.LocalPath;
+
 /**
- * 视频人脸识别
+ * 视频人脸探测
  */
 public class VideoFace extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	private static final String DDL_PATH = "/opencv/ddl/opencv_java341.dll";
-	private static final String DDL_MEDIA_PATH = "/opencv/ddl/opencv_ffmpeg341_64.dll";
+	private static final String DLL_PATH = "/opencv/dll/opencv_java341.dll";
+	private static final String DLL_MEDIA_PATH = "/opencv/dll/opencv_ffmpeg341_64.dll";
 	private static final String XML_PATH = "/opencv/xml/haarcascade_frontalface_alt.xml";
 
 	private BufferedImage image;
 
 	public static void main(String[] args) throws Exception {
-		System.load(localPath(DDL_PATH));
-		System.load(localPath(DDL_MEDIA_PATH));
+		System.load(LocalPath.localPath(DLL_PATH));
+		System.load(LocalPath.localPath(DLL_MEDIA_PATH));
 		Mat mat = new Mat();
-		VideoCapture capture = new VideoCapture(localPath("/video/mayun.mp4")); // 视频
+		VideoCapture capture = new VideoCapture(LocalPath.localPath("/video/mayun.mp4")); // 视频
 //		VideoCapture capture = new VideoCapture(0); // 摄像头
 		int height = (int) capture.get(Videoio.CAP_PROP_FRAME_HEIGHT);
 		int width = (int) capture.get(Videoio.CAP_PROP_FRAME_WIDTH);
@@ -113,15 +115,11 @@ public class VideoFace extends JPanel {
 		}
 	}
 
-	public static final String localPath(String name) {
-		return ImageFace.class.getResource(name).getPath().substring(1);
-	}
-	
 	/**
 	 * 人脸识别
 	 */
 	private static final Mat detectFace(Mat mat) throws Exception {
-		CascadeClassifier faceDetector = new CascadeClassifier(localPath(XML_PATH));
+		CascadeClassifier faceDetector = new CascadeClassifier(LocalPath.localPath(XML_PATH));
 		MatOfRect faceDetections = new MatOfRect();
 		faceDetector.detectMultiScale(mat, faceDetections);
 		Rect[] rects = faceDetections.toArray();

@@ -1,4 +1,4 @@
-package com.acgist.face;
+package com.acgist.player;
 
 import java.nio.Buffer;
 import java.nio.ByteBuffer;
@@ -17,6 +17,8 @@ import org.bytedeco.javacv.FFmpegFrameGrabber;
 import org.bytedeco.javacv.Frame;
 import org.bytedeco.javacv.FrameGrabber;
 import org.bytedeco.javacv.FrameGrabber.Exception;
+
+import com.acgist.utils.LocalPath;
 
 /**
  * javacv-platform
@@ -197,12 +199,8 @@ public class AudioPlayer {
 		System.out.println("音频通道数" + grabber.getAudioChannels());
 	}
 
-	public static final String localPath(String name) {
-		return ImageFace.class.getResource(name).getPath().substring(1);
-	}
-
 	public static void main(String[] args) throws Exception {
-		new AudioPlayer(localPath("/video/mayun.mp4"));
+		new AudioPlayer(LocalPath.localPath("/video/mayun.mp4"));
 	}
 	
 }

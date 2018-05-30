@@ -21,20 +21,22 @@ import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
 
+import com.acgist.utils.LocalPath;
+
 /**
- * 人脸识别
+ * 人脸探测
  */
 public class ImageFace {
 
-	private static final String DDL_PATH = "/opencv/ddl/opencv_java341.dll";
+	private static final String DLL_PATH = "/opencv/dll/opencv_java341.dll";
 	private static final String XML_PATH = "/opencv/xml/haarcascade_frontalface_alt.xml";
 	
 	public static void main(String[] args) throws URISyntaxException, IOException {
 //		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-		System.load(localPath(DDL_PATH));
+		System.load(LocalPath.localPath(DLL_PATH));
 		Mat image = openImage("/image/csol01.jpg");
 //		Mat image = openImage("/image/崔智云.jpg");
-		CascadeClassifier faceDetector = new CascadeClassifier(localPath(XML_PATH));
+		CascadeClassifier faceDetector = new CascadeClassifier(LocalPath.localPath(XML_PATH));
 		MatOfRect faceDetections = new MatOfRect();
 		faceDetector.detectMultiScale(image, faceDetections);
 		for (Rect rect : faceDetections.toArray()) {
@@ -47,7 +49,7 @@ public class ImageFace {
 	
 	public static final Mat openImage(String name) throws IOException {
 //		不能读取含有中文的文件
-//		String path = Face.class.getResource(name).getPath().substring(1);
+//		String path = FaceRecog.class.getResource(name).getPath().substring(1);
 //		Mat image = Imgcodecs.imread(path);
 //		解决中文问题
 		InputStream input = ImageFace.class.getResourceAsStream(name);
@@ -57,10 +59,9 @@ public class ImageFace {
 		return image;
 	}
 	
-	public static final String localPath(String name) {
-		return ImageFace.class.getResource(name).getPath().substring(1);
-	}
-	
+	/**
+	 * Mat转换BufferedImage
+	 */
 	public static final void mat2image(Mat mat) throws IOException {
 		String ext = ".jpg"; // 默认JPG
 		String formatName = ext.substring(1);
@@ -69,7 +70,7 @@ public class ImageFace {
 		byte[] byteArray = matOfByte.toArray();
 		InputStream input = new ByteArrayInputStream(byteArray);
 		BufferedImage image = ImageIO.read(input);
-		ImageIO.write(image, formatName, new FileOutputStream("E:/test" + ext));
+		ImageIO.write(image, formatName, new FileOutputStream("./mat2image" + ext));
 	}
 
 }

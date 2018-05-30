@@ -1,4 +1,4 @@
-package com.acgist.face;
+package com.acgist.player;
 
 import java.util.concurrent.ExecutionException;
 
@@ -10,18 +10,20 @@ import org.bytedeco.javacv.Frame;
 import org.bytedeco.javacv.FrameGrabber;
 import org.bytedeco.javacv.FrameGrabber.Exception;
 
+import com.acgist.utils.LocalPath;
+
 /**
  * javacv-platform
  */
 public class VideoPlayer {
 
-	private static final String DDL_PATH = "/opencv/ddl/opencv_java341.dll";
-	private static final String DDL_MEDIA_PATH = "/opencv/ddl/opencv_ffmpeg341_64.dll";
+	private static final String DLL_PATH = "/opencv/dll/opencv_java341.dll";
+	private static final String DLL_MEDIA_PATH = "/opencv/dll/opencv_ffmpeg341_64.dll";
 	
 	public static void main(String[] args) throws Exception, InterruptedException, ExecutionException {
-		System.load(localPath(DDL_PATH));
-		System.load(localPath(DDL_MEDIA_PATH));
-		FFmpegFrameGrabber grabber = FFmpegFrameGrabber.createDefault(localPath("/video/mayun.mp4"));
+		System.load(LocalPath.localPath(DLL_PATH));
+		System.load(LocalPath.localPath(DLL_MEDIA_PATH));
+		FFmpegFrameGrabber grabber = FFmpegFrameGrabber.createDefault(LocalPath.localPath("/video/mayun.mp4"));
 		grabber.start();
 		int time = (int) (grabber.getLengthInTime() / 1000 / 1000);
 		int totalFps = grabber.getLengthInVideoFrames();
@@ -31,10 +33,6 @@ public class VideoPlayer {
 		grabber.close();
 	}
 	
-	public static final String localPath(String name) {
-		return ImageFace.class.getResource(name).getPath().substring(1);
-	}
-
 	private static final void showFrames(String winTitle, FrameGrabber grabber, int fps) throws Exception, InterruptedException {
 		CanvasFrame canvas = new CanvasFrame(winTitle, 1); // 新建一个窗口
 		canvas.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
