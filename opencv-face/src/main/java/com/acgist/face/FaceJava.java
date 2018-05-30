@@ -39,7 +39,7 @@ public class FaceJava {
 		MatOfInt labels = new MatOfInt(new int[imageFiles.length]);
 		for (File image : imageFiles) {
 			Mat inputMat = Imgcodecs.imread(image.getAbsolutePath(), Imgcodecs.CV_IMWRITE_JPEG_OPTIMIZE);
-			int label = getIdFromImage(image.getName(), nameMapping);
+			int label = imageLabel(image.getName(), nameMapping);
 			images.add(faceMat(inputMat));
 			labels.put(counter++, 0, label);
 		}
@@ -49,12 +49,9 @@ public class FaceJava {
 		
 		eigenFaceRecognizer.train(images, labels);
 		
-//		Mat testImageAndrea = Imgcodecs.imread("/home/test/att_faces/s1/1.pgm", Imgcodecs.CV_LOAD_IMAGE_GRAYSCALE);
-//		Mat testImageChiarina = Imgcodecs.imread("/home/test/att_faces/s1/2.pgm", Imgcodecs.CV_LOAD_IMAGE_GRAYSCALE);
-//		int predictedLabelAndrea = faceRecognizer.predict(testImageAndrea);
-//		int predictedLabelChiarina = faceRecognizer.predict(testImageChiarina);
-//		System.out.println("Predicted label andrea: " + idToNameMapping.get(predictedLabelAndrea));
-//		System.out.println("Predicted label chiarina: " + idToNameMapping.get(predictedLabelChiarina));
+		Mat targetMat = Imgcodecs.imread(LocalPath.localPath("/image/csol01.jpg"), Imgcodecs.CV_LOAD_IMAGE_GRAYSCALE);
+		int label = eigenFaceRecognizer.predict_label(targetMat);
+		System.out.println("targetMat: " + nameMapping.get(label));
 	}
 	
 	public static Mat faceMat(Mat inputMat) {
@@ -114,9 +111,9 @@ public class FaceJava {
 		return root.listFiles(filter);
 	}
 
-	private static final int getIdFromImage(String filename, Map<Integer, String> idToNameMapping) {
+	private static final int imageLabel(String filename, Map<Integer, String> nameMapping) {
 		String name = filename.split("_")[0];
-		return idToNameMapping.keySet().stream().filter(id -> idToNameMapping.get(id).equals(name)).findFirst().orElse(-1);
+		return nameMapping.keySet().stream().filter(id -> nameMapping.get(id).equals(name)).findFirst().orElse(-1);
 	}
 
 	private static final Map<Integer, String> createSummary(File[] imageFiles) {
@@ -130,4 +127,5 @@ public class FaceJava {
 		}
 		return nameMapping;
 	}
+	
 }
