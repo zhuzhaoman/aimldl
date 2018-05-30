@@ -42,7 +42,7 @@ public class FaceID {
 	}
 	
 	/**
-	 * 训练
+	 * 人脸置信度
 	 */
 	public static final void train() throws IOException {
 		EigenFaceRecognizer eigenFaceRecognizer = EigenFaceRecognizer.create();
@@ -91,12 +91,15 @@ public class FaceID {
 //		System.out.println("label：" + eigenFaceRecognizer.predict_label(opencv_imgcodecs.imread("E://face85.jpg", opencv_imgcodecs.CV_LOAD_IMAGE_GRAYSCALE)));
 	}
 	
+	/**
+	 * 打标签
+	 */
 	public static final void label() {
 		EigenFaceRecognizer eigenFaceRecognizer = EigenFaceRecognizer.create();
 //		FisherFaceRecognizer fisherFaceRecognizer = FisherFaceRecognizer.create(); // 训练时必须大于等于两个label
 		LBPHFaceRecognizer lbphFaceRecognizer = LBPHFaceRecognizer.create();
 		int index = 0;
-		IMAGES.addAll(TEST_IMAGES);
+		IMAGES.addAll(TEST_IMAGES); // 添加测试数据
 		int[] labes = new int[IMAGES.size()];
 		MatVector src = new MatVector();
 		for (String image : IMAGES) {
