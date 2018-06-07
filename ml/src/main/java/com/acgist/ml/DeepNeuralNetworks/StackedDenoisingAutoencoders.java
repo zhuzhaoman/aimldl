@@ -11,6 +11,10 @@ import java.util.Random;
 import com.acgist.ml.MultiLayerNeuralNetworks.HiddenLayer;
 import com.acgist.ml.SingleLayerNeuralNetworks.LogisticRegression;
 
+/**
+ * 栈式去噪自编码器
+ *
+ */
 public class StackedDenoisingAutoencoders {
 
 	public int nIn;

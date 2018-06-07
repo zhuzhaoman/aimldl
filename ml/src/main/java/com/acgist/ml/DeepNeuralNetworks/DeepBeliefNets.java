@@ -11,6 +11,9 @@ import java.util.Random;
 import com.acgist.ml.MultiLayerNeuralNetworks.HiddenLayer;
 import com.acgist.ml.SingleLayerNeuralNetworks.LogisticRegression;
 
+/**
+ * 深度信念网络
+ */
 public class DeepBeliefNets {
 
 	public int nIn;

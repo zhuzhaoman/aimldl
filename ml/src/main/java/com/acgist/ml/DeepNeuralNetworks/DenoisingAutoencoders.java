@@ -10,6 +10,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * 去噪自编码器
+ */
 public class DenoisingAutoencoders {
 
 	public int nVisible;

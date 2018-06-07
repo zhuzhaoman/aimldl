@@ -10,6 +10,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * 限制玻尔兹曼机
+ */
 public class RestrictedBoltzmannMachines {
 
 	public int nVisible;
