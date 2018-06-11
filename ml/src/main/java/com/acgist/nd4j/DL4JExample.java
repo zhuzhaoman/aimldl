@@ -36,11 +36,11 @@ public class DL4JExample {
 //		net.setListeners(new StatsListener(statsStorage));
 		// 神经网络配置
 		MultiLayerConfiguration conf = new NeuralNetConfiguration.Builder()
-			.seed(4)
+			.seed(4) // 
 			.iterations(1) // Epoch数量和迭代次数
 			.learningRate(1E-6F) // 学习速率
-			.optimizationAlgo(OptimizationAlgorithm.CONJUGATE_GRADIENT)
-			.l1(1E-1).regularization(true).l2(2E-4) // 正则化
+			.optimizationAlgo(OptimizationAlgorithm.CONJUGATE_GRADIENT) // 优化代价函数
+			.l1(1E-1).regularization(true).l2(2E-4) // 正则化：防止过拟合
 			.useDropConnect(true)
 			.list() // 多层网络和单层网络
 			.layer(0, new RBM.Builder(RBM.HiddenUnit.RECTIFIED, RBM.VisibleUnit.GAUSSIAN)
@@ -51,7 +51,7 @@ public class DL4JExample {
 				.activation(Activation.RELU) // 激活函数
 //				.lossFunction(LossFunction.RMSE_XENT) // 损失函数
 				.lossFunction(LossFunction.NEGATIVELOGLIKELIHOOD) // 损失函数
-				.updater(Updater.ADAGRAD) // 更新器和优化算法
+				.updater(Updater.ADAGRAD) // 更新器和优化算法：动量
 				.dropOut(0.5D)
 				.build()
 			)
