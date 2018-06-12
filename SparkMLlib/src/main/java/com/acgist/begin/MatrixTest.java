@@ -14,7 +14,7 @@ public class MatrixTest {
 		matrix = DenseMatrix.eye(3);
 		System.out.println(matrix);
 	}
-	
+
 	@Test
 	public void vector() {
 		DenseVector vector = new DenseVector(new double[] {1D, 2D, 3D, 4D});
@@ -30,5 +30,5 @@ public class MatrixTest {
 		double value = BLAS.dot(vector, vector);
 		System.out.println(value);
 	}
-	
+
 }
