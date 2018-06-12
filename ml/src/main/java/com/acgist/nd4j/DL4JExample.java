@@ -24,7 +24,7 @@ import org.nd4j.linalg.lossfunctions.LossFunctions.LossFunction;
 
 public class DL4JExample {
 
-	@SuppressWarnings({ "deprecation", "unused" })
+	@SuppressWarnings({ "deprecation" })
 	public static void main(String[] args) throws Exception {
 //		// 初始化用户界面后端
 //		UIServer uiServer = UIServer.getInstance();
