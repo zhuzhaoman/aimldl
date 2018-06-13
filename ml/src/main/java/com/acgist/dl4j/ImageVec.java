@@ -1,4 +1,4 @@
-package com.acgist.nd4j;
+package com.acgist.dl4j;
 
 import org.datavec.api.records.reader.RecordReader;
 import org.datavec.api.split.InputStreamInputSplit;
