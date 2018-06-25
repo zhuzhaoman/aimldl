@@ -1,4 +1,4 @@
-package com.acgist.begin.regression;
+package com.acgist.regression;
 
 import java.util.ArrayList;
 import java.util.List;

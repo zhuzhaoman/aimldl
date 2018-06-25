@@ -1,4 +1,4 @@
-package com.acgist.begin.classify;
+package com.acgist.classify;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +13,9 @@ import org.apache.spark.mllib.regression.LabeledPoint;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * 贝叶斯
+ */
 public class BayesTest {
 
 	private SparkConf conf;
