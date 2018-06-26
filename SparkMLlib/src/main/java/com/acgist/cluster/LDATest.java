@@ -19,6 +19,7 @@ import scala.Tuple2;
 /**
  * LDA
  */
+@Deprecated
 public class LDATest {
 
 	private SparkConf conf;
