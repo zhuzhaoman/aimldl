@@ -19,7 +19,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * 图片分类，效果不好
+ * 图片分类，特征工程没做好，暂时跳过
  */
 public class ImageTest {
 
