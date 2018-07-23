@@ -15,7 +15,7 @@ import org.nd4j.linalg.factory.Nd4j;
 /**
  * 聚类
  */
-public class ImageClusterTest {
+public class KMeansImageClassifyTest {
 
 	@Test
 	public void KMeans() {
@@ -32,14 +32,17 @@ public class ImageClusterTest {
 		// 可以使用classifyPoint(points.get(0), false)使center中心点不进行更新移动
 
 		clusterSet.getClusters().forEach(value -> {
-			System.err.print(value.getId() + " ");
-			System.err.print(value.getLabel() + " ");
-			System.err.println();
+			StringBuffer content = new StringBuffer();
+			content.append("类别：");
+			content.append(value.getId() + " ");
+			content.append(value.getLabel() + "\n");
 			value.getPoints().forEach(point -> {
-				System.out.print(point.getId() + " ");
-				System.out.print(point.getLabel() + " ");
-				System.out.println(point.getArray());
+				content.append(point.getId() + " ");
+				content.append(point.getLabel() + " ");
+				content.append(point.getArray());
+				content.append("\n");
 			});
+			System.out.println(content);
 		});
 	}
 	
@@ -47,8 +50,8 @@ public class ImageClusterTest {
 		List<Point> points = new ArrayList<>();
 		points.add(new Point("id-1", "label-1", new double[] {1D, 1D, 1D}));
 		points.add(new Point("id-2", "label-2", new double[] {1D, 2D, 2D}));
-		points.add(new Point("id-4", "label-4", new double[] {100D, 101D, 200D}));
-		points.add(new Point("id-5", "label-5", new double[] {101D, 100D, 201D}));
+		points.add(new Point("id-3", "label-3", new double[] {100D, 101D, 200D}));
+		points.add(new Point("id-4", "label-4", new double[] {101D, 100D, 201D}));
 		return points;
 	}
 	

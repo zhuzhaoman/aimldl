@@ -20,9 +20,9 @@
 			<version>0.8.0</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.deeplearning4j</groupId>
-		    <artifactId>deeplearning4j-ui_2.11</artifactId>
-		    <version>0.9.1</version>
+			<groupId>org.deeplearning4j</groupId>
+			<artifactId>deeplearning4j-ui_2.11</artifactId>
+			<version>0.8.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.nd4j</groupId>
