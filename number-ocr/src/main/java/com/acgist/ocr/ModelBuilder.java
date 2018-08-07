@@ -1,8 +1,6 @@
 package com.acgist.ocr;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.deeplearning4j.datasets.iterator.impl.MnistDataSetIterator;
 import org.deeplearning4j.eval.Evaluation;
@@ -37,18 +35,14 @@ public class ModelBuilder {
 		int outputNum = 10;
 		int batchSize = 64;
 		int nEpochs = 1;
-		int seed = 123;
+		int seed = 12345;
 		LOGGER.info("加载数据");
-		DataSetIterator mnistTrain = new MnistDataSetIterator(batchSize, true, 12345);
-		DataSetIterator mnistTest = new MnistDataSetIterator(batchSize, false, 12345);
+		DataSetIterator mnistTrain = new MnistDataSetIterator(batchSize, true, seed);
+		DataSetIterator mnistTest = new MnistDataSetIterator(batchSize, false, seed);
 		LOGGER.info("构建模型");
-		Map<Integer, Double> lrSchedule = new HashMap<>();
-		lrSchedule.put(0, 0.01);
-		lrSchedule.put(1000, 0.005);
-		lrSchedule.put(3000, 0.001);
 		MultiLayerConfiguration conf = new NeuralNetConfiguration.Builder()
 			.seed(seed)
-			.l2(0.0005)
+			.l2(0.0001)
 			.momentum(0.9)
 			.learningRate(0.01)
 			.updater(Updater.NESTEROVS)
@@ -57,7 +51,7 @@ public class ModelBuilder {
 			.layer(0, new ConvolutionLayer.Builder(5, 5)
 				.nIn(nChannels)
 				.stride(1, 1)
-				.nOut(20)
+				.nOut(32)
 				.activation(Activation.IDENTITY)
 				.build()
 			)
@@ -68,7 +62,7 @@ public class ModelBuilder {
 			)
 			.layer(2, new ConvolutionLayer.Builder(5, 5)
 				.stride(1, 1)
-				.nOut(50)
+				.nOut(64)
 				.activation(Activation.IDENTITY)
 				.build()
 			)
@@ -93,7 +87,6 @@ public class ModelBuilder {
 			.build();
 		MultiLayerNetwork model = new MultiLayerNetwork(conf);
 		model.init();
-		System.out.println(mnistTest.batch());
 		LOGGER.info("训练模型");
 		model.setListeners(new ScoreIterationListener(10));
 		for (int i = 0; i < nEpochs; i++) {

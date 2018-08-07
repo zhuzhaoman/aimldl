@@ -1,0 +1,2 @@
+# 数字识别
+使用Mnist、deeplearning4j训练cnn模型对手写数字进行识别。
