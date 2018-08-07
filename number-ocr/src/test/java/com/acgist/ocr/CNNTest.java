@@ -1,4 +1,4 @@
-package com.acgist.dl4j;
+package com.acgist.ocr;
 
 import java.util.HashMap;
 import java.util.Map;
