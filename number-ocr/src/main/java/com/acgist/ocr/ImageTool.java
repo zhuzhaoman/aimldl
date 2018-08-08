@@ -204,7 +204,7 @@ public class ImageTool {
 				}
 			}
 		}
-		int avg = (int) (total / size);
+		int avg = (int) (total / size); // 注意这里使用的是平均数
 		for (int i = 0; i < rheight; i++) {
 			for (int j = 0; j < rwidth; j++) {
 				int pixel = resizeImage.getRGB(j, i);
