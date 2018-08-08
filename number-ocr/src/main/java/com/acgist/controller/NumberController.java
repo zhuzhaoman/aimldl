@@ -5,6 +5,7 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
+import java.util.UUID;
 
 import javax.annotation.PostConstruct;
 import javax.imageio.ImageIO;
@@ -79,9 +80,15 @@ public class NumberController {
 		        }
 		        Java2DFrameConverter converter = new Java2DFrameConverter();
 		        BufferedImage bufferedImage = converter.convert(image.getFrame());
-		        bufferedImage = ImageTool.gray(bufferedImage); // 灰度化
-		        bufferedImage = ImageTool.binary(bufferedImage); // 二值化
-		        bufferedImage = ImageTool.inverse(bufferedImage); // 反色
+//		        bufferedImage = ImageTool.gray(bufferedImage);
+		        bufferedImage = ImageTool.binary(bufferedImage);
+		        bufferedImage = ImageTool.inverse(bufferedImage);
+		        bufferedImage = ImageTool.resize(bufferedImage, 28, 28);
+//		        try {
+//					ImageIO.write(bufferedImage, "jpg", new File("e:/tmp/number/" + UUID.randomUUID().toString() + ".jpg"));
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
 				return new ImageWritable(converter.convert(bufferedImage));
 			}
 			@Override

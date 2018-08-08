@@ -42,6 +42,7 @@ public class NumberOCR {
 //		DataSetIterator testData = readOri(); // 手工处理的数据
 		DataSetIterator testData = readProcess(); // 自动处理数据
 		DataSet set = testData.next();
+		set.getFeatureMatrix().divi(0.70F);
 		LOGGER.debug("测试数据：{}", set.getFeatureMatrix());
 		int[] data = model.predict(set.getFeatureMatrix());
 //		LOGGER.info("获取最大值索引：{}", Nd4j.getBlasWrapper().iamax(model.output(set.getFeatureMatrix()).getRow(0)));
@@ -99,7 +100,7 @@ public class NumberOCR {
 				int index = name.lastIndexOf("-") + 1;
 				return new Text(name.substring(index, index + 1));
 			}
-		}, new ImageTransform() { // 图片颜色二值化
+		}, new ImageTransform() { // 图片处理
 			@Override
 			public ImageWritable transform(ImageWritable image, Random random) {
 		        if (image == null) {
@@ -107,13 +108,15 @@ public class NumberOCR {
 		        }
 		        Java2DFrameConverter converter = new Java2DFrameConverter();
 		        BufferedImage bufferedImage = converter.convert(image.getFrame());
+//		        bufferedImage = ImageTool.gray(bufferedImage);
 		        bufferedImage = ImageTool.binary(bufferedImage);
 		        bufferedImage = ImageTool.inverse(bufferedImage);
-		        try {
-					ImageIO.write(bufferedImage, "jpg", new File("e:/tmp/number/" + UUID.randomUUID().toString() + ".jpg"));
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+		        bufferedImage = ImageTool.resize(bufferedImage, 28, 28);
+//		        try {
+//		        	ImageIO.write(bufferedImage, "jpg", new File("e:/tmp/number/" + UUID.randomUUID().toString() + ".jpg"));
+//		        } catch (IOException e) {
+//		        	e.printStackTrace();
+//		        }
 				return new ImageWritable(converter.convert(bufferedImage));
 			}
 			@Override
@@ -121,6 +124,7 @@ public class NumberOCR {
 				return this.transform(image, new Random());
 			}
 		})) {
+//			String path = NumberOCR.class.getResource("/number/test/").getFile();
 			String path = NumberOCR.class.getResource("/number/readProcess/").getFile();
 			LOGGER.info("识别图片路径：{}", path);
 			reader.initialize(new FileSplit(new File(path)));

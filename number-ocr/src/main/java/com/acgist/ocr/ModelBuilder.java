@@ -35,16 +35,17 @@ public class ModelBuilder {
 		int outputNum = 10;
 		int batchSize = 64;
 		int nEpochs = 1;
-		int seed = 12345;
+		int seed = 123456;
 		LOGGER.info("加载数据");
 		DataSetIterator mnistTrain = new MnistDataSetIterator(batchSize, true, seed);
 		DataSetIterator mnistTest = new MnistDataSetIterator(batchSize, false, seed);
 		LOGGER.info("构建模型");
 		MultiLayerConfiguration conf = new NeuralNetConfiguration.Builder()
 			.seed(seed)
-			.l2(0.0001)
+			.l2(0.0006)
+//			.regularization(true)
 			.momentum(0.9)
-			.learningRate(0.01)
+			.learningRate(0.02)
 			.updater(Updater.NESTEROVS)
 			.weightInit(WeightInit.XAVIER)
 			.list()
@@ -73,7 +74,7 @@ public class ModelBuilder {
 			)
 			.layer(4, new DenseLayer.Builder()
 				.activation(Activation.RELU)
-				.nOut(500)
+				.nOut(400)
 				.build()
 			)
 			.layer(5, new OutputLayer.Builder(LossFunctions.LossFunction.NEGATIVELOGLIKELIHOOD)

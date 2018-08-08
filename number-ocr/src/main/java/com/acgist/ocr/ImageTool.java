@@ -12,6 +12,8 @@ import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.mortennobel.imagescaling.ResampleOp;
+
 /**
  * 图片处理工具
  */
@@ -99,7 +101,7 @@ public class ImageTool {
 	public static final BufferedImage inverse(BufferedImage image) {
 		int width = image.getWidth();
 		int height = image.getHeight();
-		BufferedImage inverseImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+		BufferedImage inverseImage = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY);
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
 				int pixel = image.getRGB(j, i);
@@ -179,6 +181,45 @@ public class ImageTool {
 			}
 		}
 		return bytes;
+	}
+	
+	/**
+	 * 修改图片大小
+	 */
+	public static final BufferedImage resize(BufferedImage image, int width, int height) {
+		ResampleOp resampleOp = new ResampleOp(width, height);
+		BufferedImage resizeImage = resampleOp.filter(image, null);
+		// 优化图片效果，使效果更加明显
+		int rwidth = resizeImage.getWidth();
+		int rheight = resizeImage.getHeight();
+		BufferedImage inverseImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+		long total = 0;
+		int size = 0;
+		for (int i = 0; i < rheight; i++) {
+			for (int j = 0; j < rwidth; j++) {
+				int pixel = resizeImage.getRGB(j, i);
+				if(pixel != -16777216) {
+					size++;
+					total+=pixel;
+				}
+			}
+		}
+		int avg = (int) (total / size);
+		for (int i = 0; i < rheight; i++) {
+			for (int j = 0; j < rwidth; j++) {
+				int pixel = resizeImage.getRGB(j, i);
+				if(pixel != -16777216) {
+					if(pixel > avg) {
+						pixel = -1;
+					} else {
+						pixel = -16777216;
+					}
+				}
+				inverseImage.setRGB(j, i, pixel);
+			}
+		}
+//		return resizeImage;
+		return inverseImage;
 	}
 	
 }
