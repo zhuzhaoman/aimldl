@@ -5,9 +5,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Random;
-import java.util.UUID;
-
-import javax.imageio.ImageIO;
 
 import org.apache.commons.io.FilenameUtils;
 import org.bytedeco.javacv.Java2DFrameConverter;

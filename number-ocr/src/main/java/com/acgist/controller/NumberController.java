@@ -5,7 +5,6 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
-import java.util.UUID;
 
 import javax.annotation.PostConstruct;
 import javax.imageio.ImageIO;
